@@ -76,9 +76,9 @@ body {
 .temp {
   position: absolute;
   z-index: -1;
-  color: #888;
-  zoom: 0.7;
-  opacity: 0.6;
+  color: #999;
+  zoom: 0.6;
+  opacity: 0.5;
   white-space: nowrap;
 }
 
