@@ -97,7 +97,7 @@ body {
   background: #fff;
   -webkit-box-shadow: 0 0 22px #333, inset 0 -3px 7px #ddd;
   -moz-box-shadow: 0 0 22px #333, inset 0 -3px 7px #ddd;
-  box-shadow: 0 0 22px #333, inset 0 -3px 7px #ddd;
+  box-shadow: 0 0 22px #333, inset 0 -3px 7px #ddd; 
 }
 
 #ok {
