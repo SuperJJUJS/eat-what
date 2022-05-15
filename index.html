@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>今天吃啥呀？</title>
+		<link rel="Shortcut Icon" href="ic.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="img/eat-min.css">
+	</head>
+
+	<body>
+		<div class="logo"><img src="img/logo.png" /></div>
+		<div id="wrapper">
+
+			<h1 style="color:#FF9733" id="what"></h1>
+			</h1>
+			<input type="button" value="一食堂" id="start" display:block; />
+			<input type="button" value="二食堂" id="start2" display:block;/>
+		</div>
+		<textarea rows="9" cols="53" id="list" style="display:none">尚品三汁焖锅（二楼） 蛋包饭卤肉饭（二楼） 早餐（一楼） 南昌拌粉（二楼） 卤味脆皮鸡饭（三楼） 老成都饭香（一楼） 海鲜炒饭（三楼） 自选套餐（三楼） 韩式拌饭（三楼） 干锅肉虾煲（三楼） 老成都特色手工米粉（一楼） 秀兰鸭血粉丝（二楼） 香辣小火锅（三楼） 烤肉饭（二楼） 常纪宣麻辣烫（一楼） 东北手工水饺（二楼） 民族风味（二楼） 麻辣香锅（二楼） 鸭血粉丝汤（一楼） 水饺面条（一楼） 麒麟早餐（一楼） 正好茶（二楼） 汉堡炸鸡（二楼） 烤盘饭（二楼） 麒麟快餐（一楼）</textarea>
+
+		<textarea rows="9" cols="53" id="list2" style="display:none">F+牛肉饭（二楼） 绝摆炒饭（二楼） 小时差奶茶（二楼） 黄焖鸡（二楼） 东北扒肉饭（二楼） 亦冰亦火焖锅（二楼） 锅盖面（二楼） 面夫子（一楼） 猪肚鸡（二楼） 煲仔饭（二楼） 五谷鱼粉 王喜峰麻辣烫(二楼） 鸡扒饭（二楼） 闫阿妈烤肉拌饭（二楼） 老北京麻辣香锅冒菜（二楼） 陕西美食小吃（三楼） 面条水饺（二楼） 西里巷铁板厨房（二楼） 炸鸡汉堡(三楼) 一楼快餐 金日升烤盘饭（二楼） 江南美食 盖浇饭（三楼）</textarea>
+		<footer>
+			<div class="copyright">
+				<p>灵感来自『出其东门』同学
+					<a href="" target="_blank">
+				</p>
+			</div>
+		</footer>
+		<script type='text/javascript' src='img/jquery-1.11.1.min.js'></script>
+		<script>
+			var key, id;
+
+			$(function() {
+				var run = 0,
+					timer;
+				var arr = document.getElementsByTagName('input');
+				for(var i = 0; i < arr.length; i++) {
+					arr[i].onclick = function() {
+						id = this.id;
+						key = "#" + id;
+						if(key == '#start') {
+							start2.style.display = "none";
+							var list = $("#list").val().replace(/ +/g, " ").replace(/^ | $/g, "").split(" ");
+						} else {
+							start.style.display = "none";
+							var list = $("#list2").val().replace(/ +/g, " ").replace(/^ | $/g, "").split(" ");
+						}
+
+						console.log()
+						$i = 0;
+						if(!run) {
+							$(this).val("停止");
+							timer = setInterval(function() {
+								var r = Math.ceil(Math.random() * list.length),
+									food = list[r - 1];
+								$("#what").html(food);
+								var rTop = Math.ceil(Math.random() * $(document).height()),
+									rLeft = Math.ceil(Math.random() * ($(document).width() - 50)),
+									rSize = Math.ceil(Math.random() * (37 - 14) + 14);
+								$("<span class='temp'></span>").html(food).hide().css({
+									"top": rTop,
+									"left": rLeft,
+									"color": "rgba(0,0,0,." + Math.random() + ")",
+									"fontSize": rSize + "px"
+								}).appendTo("body").fadeIn("slow", function() {
+									$(this).fadeOut("slow", function() {
+										$(this).remove();
+									});
+								});
+							}, 50);
+
+							run = 1;
+
+						} else {
+							$(key).click(function() {
+								console.log(key);
+								$i++;
+								if($i == 10) {
+									$(key).hide();
+									$('#what').html('这么挑？饿着吧！');
+								}
+							})
+							$(this).val("不行，换一个");
+							clearInterval(timer);
+							run = 0;
+
+						};
+
+					}
+				}
+
+				document.onkeydown = function enter(e) {
+					var e = e || event;
+					if(e.keyCode == 13) $(key).trigger("click");
+				};
+			});
+		</script>
+		<!--pb-->
+		<script>
+			document.oncontextmenu = function(event) {
+				if(window.event) {
+					event = window.event;
+				}
+				try {
+					var the = event.srcElement;
+					if(!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+						return false;
+					}
+					return true;
+				} catch(e) {
+					return false;
+				}
+			}
+		</script>
+		<script type="text/javascript">
+			if(self == top) {
+				var theBody = document.getElementsByTagName('body')[0];
+				theBody.style.display = "block";
+			} else {
+				top.location = self.location;
+			}
+		</script>
+	</body>
+
+</html>
